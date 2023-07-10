@@ -1,3 +1,7 @@
+const switcher = document.querySelector(".switcher");
+const body = document.querySelector("body");
+const timeText = document.querySelector(".time");
+
 let timeStamp = localStorage.getItem("timeStamp") ||  "";
 let turnedOn;
 
@@ -7,17 +11,13 @@ if (localStorage.getItem("turnedOn") === "false"){
     turnedOn = true;
 }
 
-const switcher = document.querySelector(".switcher");
-const body = document.querySelector("body");
-const timeText = document.querySelector(".time");
+timeText.textContent = timeStamp;
 
-timeText.innerHTML = timeStamp;
-
-if(turnedOn === true) {
-    switcher.innerHTML = "Turn off";
+if(turnedOn) {
+    switcher.textContent = "Turn off";
 } else {
     body.classList.add("dark-mode");
-    switcher.innerHTML = "Turn on";
+    switcher.textContent = "Turn on";
 }
 
 switcher.addEventListener("click", changeTimeMode)
@@ -26,13 +26,13 @@ function changeTimeMode() {
     if (turnedOn) {
         turnedOn = false;
         timeStamp = "Last turn off: " + getDateNow();
-        switcher.innerHTML = "Turn on";
+        switcher.textContent = "Turn on";
     } else {
         turnedOn = true;
         timeStamp = "Last turn on: " + getDateNow();
-        switcher.innerHTML = "Turn off";
+        switcher.textContent = "Turn off";
     }
-    timeText.innerHTML = timeStamp;
+    timeText.textContent = timeStamp;
     
     body.classList.toggle("dark-mode");
 
